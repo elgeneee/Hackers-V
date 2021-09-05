@@ -149,7 +149,9 @@
                             <input type="number" placeholder="e.g. 6" name="remaining_tenure" required>
                           </div>
                         </div>
-                        <h5 class="font-weight-bolder text-center">{{ predicted_price }}</h5>
+                        {% if predicted_price %}
+                          <h5 class="font-weight-bolder text-center">Predicted Price: {{ predicted_price }}</h5>
+                        {% endif %}
                         <div class="button">
                           <input type="submit" value="Predict">
                        </div>
