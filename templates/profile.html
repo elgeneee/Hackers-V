@@ -4,9 +4,8 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="icon" type="image/png" href="/static/assets/" sizes="16x16">
-    <link rel="icon" type="image/png" href="/assets/logo.png" sizes="32x32">
-    <link rel="icon" type="image/png" href="/assets/logo.png" sizes="96x96">
+    <link rel="icon" href="/static/assets/favicon.ico" type="image/x-icon" sizes="16x16">
+    <link rel="icon" href="/static/assets/favicon.ico" type="image/x-icon" sizes="32x32">
     <link id="pagestyle" href="/static/styles/dashboard.css" rel="stylesheet" />
     <title>Hackers V</title>
     <!--     Fonts and icons     -->
@@ -162,7 +161,7 @@
                   <h6 class="mb-0">Profile Information</h6>
                 </div>
                 <div class="col-md-4 text-end">
-                  <a href="">
+                  <a href="{{ url_for('edit_profile') }}">
                     <i class="fas fa-user-edit text-secondary text-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Profile"></i>
                   </a>
                 </div>
@@ -176,18 +175,6 @@
                 <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Mobile:</strong> &nbsp; +60 12-4787763</li>
                 <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Email:</strong> &nbsp; eedren@gmail.com</li>
                 <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Location:</strong> &nbsp; Penang, MY</li>
-                <li class="list-group-item border-0 ps-0 pb-0">
-                  <strong class="text-dark text-sm">Social:</strong> &nbsp;
-                  <a class="btn btn-facebook btn-simple mb-0 ps-1 pe-2 py-0">
-                    <i class="fab fa-facebook fa-lg"></i>
-                  </a>
-                  <a class="btn btn-twitter btn-simple mb-0 ps-1 pe-2 py-0">
-                    <i class="fab fa-twitter fa-lg"></i>
-                  </a>
-                  <a class="btn btn-instagram btn-simple mb-0 ps-1 pe-2 py-0">
-                    <i class="fab fa-instagram fa-lg"></i>
-                  </a>
-                </li>
               </ul>
             </div>
           </div>

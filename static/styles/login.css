@@ -120,6 +120,49 @@ button.ghost {
 	text-decoration: none;
   }
 
+.gradient-button-sign-up {
+margin: 10px;
+border: 1px solid white;
+background-color: transparent;
+font-size: 13px;
+padding: 15px;
+text-align: center;
+transition: 0.5s;
+background-size: 200% auto;
+color: #FFF;
+border-radius: 10px;
+width: 200px;
+box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+cursor: pointer;
+display: inline-block;
+border-radius: 10px;
+
+bottom: 13px;
+text-decoration: none;
+}
+
+.gradient-button-sign-up:hover {
+	margin: 10px;
+	border: 1px solid white;
+	background-color: transparent;
+	font-size: 13px;
+	padding: 15px;
+	text-align: center;
+	transition: 0.5s;
+	background-size: 200% auto;
+	color: #FFF;
+	border-radius: 10px;
+	width: 200px;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+	transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+	cursor: pointer;
+	display: inline-block;
+	border-radius: 10px;
+	bottom: 13px;
+	text-decoration: none;
+	}
+
 form {
 	background-color: #FFFFFF;
 	display: flex;
@@ -141,6 +184,18 @@ input {
 
 .container {
 	background-color: #fff;
+	border-radius: 10px;
+  	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
+			0 10px 10px rgba(0,0,0,0.22);
+	position: relative;
+	overflow: hidden;
+	width: 768px;
+	max-width: 100%;
+	min-height: 480px;
+}
+
+.container-sign-up {
+	background: linear-gradient(to right, #BF336C, #EF6133);
 	border-radius: 10px;
   	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
 			0 10px 10px rgba(0,0,0,0.22);
@@ -243,6 +298,25 @@ input {
 	transition: transform 0.6s ease-in-out;
 }
 
+.overlay-sign-up {
+	background: #60a9bf;
+	background: -webkit-linear-gradient(to right, #2bfbff, #41ffb6);
+	background: linear-gradient(to right, #BF336C, #EF6133);
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: 0 0;
+	color: #FFFFFF;
+	position: relative;
+	left: -100%;
+	height: 100%;
+	width: 200%;
+  	transform: translateX(0);
+	transition: transform 0.6s ease-in-out;
+}
+
+.h1 {
+	text-align: center;
+}
 .container.right-panel-active .overlay {
   	transform: translateX(50%);
 }

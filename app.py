@@ -1,10 +1,21 @@
 from flask import Flask, render_template, url_for, request
+from flask_sqlalchemy import SQLAlchemy
+from flask_login import UserMixin
+from flask_wtf import wtforms
 import urllib.request
 import json
 import os
 import ssl
 
 app = Flask(__name__)
+# db = SQLAlchemy(app) #database instance
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db' #connect to the database
+# app.config['SECRET_KEY'] = '1234'
+
+# class User(db.Model, UserMixin):
+#     id = db.Column(db.Integer, primary_key=True)
+#     email = db.Column(db.String(50), nullable=False, unique=True)
+#     password = db.Column(db.String(80), nullable=False)
 
 @app.route('/')
 def index():
@@ -40,6 +51,13 @@ def profile():
 @app.route('/upgrade')
 def upgrade():
     return render_template('upgrade.html')
+
+@app.route('/edit-profile', methods =["GET", "POST"])
+def edit_profile():
+    if request.method == "POST":
+        profile()
+    else:
+        return render_template('edit-profile.html')
 
 def predict_price(valueDate, bondId, evalMidYield, compositeLiquidityScore, couponFrequency, nextCouponRate, modifiedDuration, evalMidPrice, rating, remainingTenure):
     data = {

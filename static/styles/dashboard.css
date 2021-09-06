@@ -417,8 +417,13 @@ form .button input{
   color: #c92d2d;
 }
 
+#phone-num{
+  display: inline-block;
+}
 
-
+#input-username2{
+  display: inline-block;
+}
 
 
 
@@ -2816,6 +2821,22 @@ progress {
 }
 
 .form-control {
+  display: block;
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.4rem;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #d2d6da;
+  appearance: none;
+  border-radius: 0.5rem;
+  transition: box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.form-control2 {
   display: block;
   width: 100%;
   padding: 0.5rem 0.75rem;
