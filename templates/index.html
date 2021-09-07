@@ -13,9 +13,10 @@
     <title>Hackers V</title>
 </head>
 <body>
+
     <div class="container" id="container">
         <div class="form-container sign-in-container">
-            <form action="#">
+            <form action="#" method="post">
                 <h1>Sign in</h1>
                 <div class="social-container">
                     <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
@@ -23,10 +24,12 @@
                     <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
                 </div>
                 <span>or use your account</span>
-                <input type="email" placeholder="Email" />
-                <input type="password" placeholder="Password" />
+                <input type="email" name="email" placeholder="Email" />
+                <input type="password" name="password" placeholder="Password" />
                 <a href="#" id="forgot-password">Forgot your password?</a>
-                <a class="gradient-button" href="{{ url_for('dashboard') }}">Sign In</a>
+                <div class="button">
+                    <input type="submit" value="Sign In">
+                 </div>
             </form>
         </div>
         <div class="overlay-container">
@@ -34,7 +37,7 @@
                 <div class="overlay-panel overlay-right">
                     <h1>Hi, There!</h1>
                     <p>Don't have an account yet? Sign Up Here!</p>
-                    <a class="gradient-button-sign-up" href="{{ url_for('upgrade') }}">Upgrade to Pro </a>
+                    <a class="gradient-button-sign-up" href="{{ url_for('sign_up') }}">Sign Up</a>
                 </div>
             </div>
         </div>

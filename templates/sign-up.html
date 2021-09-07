@@ -14,11 +14,13 @@
 </head>
 <body>
     <div class="container" id="container">
-        <form action="#">
+        <form action="#" method="post">
             <h1>Sign Up</h1>
-            <input type="email" placeholder="Email" />
-            <input type="password" placeholder="Password" />
-            <a class="gradient-button" href="{{ url_for('dashboard') }}">Register</a>
+            <input type="email" class="sign-up-box" name="email" placeholder="Email" />
+            <input type="password" class="sign-up-box" name="password" placeholder="Password" />
+            <div class="button">
+                <input type="submit" value="Register">
+             </div>
         </form>
     </div>
 </body>

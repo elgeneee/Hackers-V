@@ -1,25 +1,21 @@
-from flask import Flask, render_template, url_for, request
-from flask_sqlalchemy import SQLAlchemy
-from flask_login import UserMixin
-from flask_wtf import wtforms
+from flask import Flask, render_template, url_for, request, redirect, flash
 import urllib.request
 import json
 import os
 import ssl
 
+
 app = Flask(__name__)
-# db = SQLAlchemy(app) #database instance
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db' #connect to the database
-# app.config['SECRET_KEY'] = '1234'
+app.secret_key = "super secret key"
 
-# class User(db.Model, UserMixin):
-#     id = db.Column(db.Integer, primary_key=True)
-#     email = db.Column(db.String(50), nullable=False, unique=True)
-#     password = db.Column(db.String(80), nullable=False)
 
-@app.route('/')
+@app.route('/', methods =["GET", "POST"])
 def index():
-    return render_template('index.html')
+    if request.method == "POST":
+        return render_template('dashboard.html')
+
+    else:
+        return render_template('index.html')
 
 @app.route('/dashboard', methods =["GET", "POST"])
 def dashboard():
@@ -58,6 +54,13 @@ def edit_profile():
         profile()
     else:
         return render_template('edit-profile.html')
+
+@app.route('/sign-up', methods =["GET", "POST"])
+def sign_up():
+    if request.method == "POST":
+        return render_template('dashboard.html')
+    else:
+        return render_template('sign-up.html')
 
 def predict_price(valueDate, bondId, evalMidYield, compositeLiquidityScore, couponFrequency, nextCouponRate, modifiedDuration, evalMidPrice, rating, remainingTenure):
     data = {
