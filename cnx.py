@@ -51,7 +51,7 @@ def login(email, logPass):
     for row in data:
         accPass = row.password
     if (logPass == accPass):
-        return True
+        return data
     else:
         return False
 
@@ -68,13 +68,19 @@ def uploadBonds(fileDir):
 
 def downloadBonds():
         SQL_Query = pd.read_sql_query('SELECT * from bonds', connection())
-           
         df = pd.DataFrame(SQL_Query, columns=['VALUE_DATE','STOCK_CODE','EVAL_MID_YIELD','COMPOSITE_LIQUIDITY_SCORE','COUPON_FREQUENCY','NEXT_COUPON_RATE','CALLABLE','MODIFIED_DURATION','EVAL_MID_PRICE','REMAINING_TENURE','OUTPUT_PRICE',
                                       'RATING_TARGET','OPR_LEVEL'])
         return df
-    
+
+def getBond(bondName):
+    cnx = connection()
+    cursor = cnx.cursor()
+    cursor.execute('SELECT * FROM bonds WHERE STOCK_CODE = ?', bondName)
+    data=cursor.fetchall()
+    return data
+
 def searchBond(bondName):
-    df = downloadBonds()
+    df = downBonds()
     subFrame = df.loc[df['STOCK_CODE'].str.contains(bondName, case=False)]
     if(len(subFrame) == 0):
         return "No bonds found"
@@ -88,8 +94,8 @@ def uploadImg(imgDir, email):
     with open(imgDir, 'rb') as photo_file:
         photo_bytes = photo_file.read()
     cursor.execute("UPDATE users SET image = ? WHERE email = ?",  photo_bytes, email)
-    print(f'{len(photo_bytes)}-byte file written for {email}')
-    # 5632-byte file written for bob@example.com
+    cnx.commit()
+    return(f'{len(photo_bytes)}-byte file written for {email}')
     
 def downloadImg(imgDir, email):
     cnx = connection()
@@ -98,7 +104,5 @@ def downloadImg(imgDir, email):
     retrieved_bytes = cursor.execute("SELECT image FROM users WHERE email = ?", email).fetchval()
     with open(imgDir + 'new.jpg', 'wb') as new_jpg:
         new_jpg.write(retrieved_bytes)
-    print(f'{len(retrieved_bytes)} bytes retrieved and written to new file')
+    return(f'{len(retrieved_bytes)} bytes retrieved and written to new file')
     # 5632 bytes retrieved and written to new file
-
-    
