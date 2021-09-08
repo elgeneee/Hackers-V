@@ -80,12 +80,14 @@ def getBond(bondName):
     return data
 
 def searchBond(bondName):
-    df = downBonds()
+    df = downloadBonds()
     subFrame = df.loc[df['STOCK_CODE'].str.contains(bondName, case=False)]
     if(len(subFrame) == 0):
         return "No bonds found"
     else:
-        return subFrame
+        records = subFrame.to_records(index=False)
+        result = list(records)
+        return result
 
 def uploadImg(imgDir, email):
     cnx = connection()
@@ -105,4 +107,4 @@ def downloadImg(imgDir, email):
     with open(imgDir + 'new.jpg', 'wb') as new_jpg:
         new_jpg.write(retrieved_bytes)
     return(f'{len(retrieved_bytes)} bytes retrieved and written to new file')
-    # 5632 bytes retrieved and written to new file
+    # 5632 bytes retrieved and written to new file      
