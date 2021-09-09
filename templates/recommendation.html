@@ -88,106 +88,22 @@
             </div>
             <div class="card-body px-0 pt-0 pb-2">
               <div class="table-responsive p-0">
-                <table class="table align-items-center mb-0">
+                <table class="table-scroll small-first-col">
                   <thead>
                     <tr>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Stock Code</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Rating</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Coupon Rate (%)</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Price (RM)</th>
-                      <th class="text-secondary opacity-7"></th>
+                      {% for header in headings%}
+                      <th>{{ header }}</th>
+                      {% endfor %}
                     </tr>
                   </thead>
                   <tbody>
+                    {% for row in data%}
                     <tr>
-                      <td>
-                        <div class="d-flex px-2 py-1">
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">VG160283</h6>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <p class="text-xs font-weight-bold mb-0">AA1</p>
-                      </td>
-                      <td class="align-middle text-center text-sm">
-                        <p class="text-xs font-weight-bold mb-0">4.100</p>
-                      </td>
-                      <td class="align-middle text-center">
-                        <p class="text-xs font-weight-bold mb-0">105.349</p>
-                      </td>
+                      {% for cell in row%}
+                      <td>{{ cell }}</td>
+                      {% endfor %}
                     </tr>
-                    <tr>
-                      <td>
-                        <div class="d-flex px-2 py-1">
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">UG200180</h6>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <p class="text-xs font-weight-bold mb-0">AA1</p>
-                      </td>
-                      <td class="align-middle text-center text-sm">
-                        <p class="text-xs font-weight-bold mb-0">4.100</p>
-                      </td>
-                      <td class="align-middle text-center">
-                        <p class="text-xs font-weight-bold mb-0">105.349</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div class="d-flex px-2 py-1">
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">UI140168</h6>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <p class="text-xs font-weight-bold mb-0">AA1</p>
-                      </td>
-                      <td class="align-middle text-center text-sm">
-                        <p class="text-xs font-weight-bold mb-0">4.100</p>
-                      </td>
-                      <td class="align-middle text-center">
-                        <p class="text-xs font-weight-bold mb-0">105.349</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div class="d-flex px-2 py-1">
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">VI140343</h6>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <p class="text-xs font-weight-bold mb-0">AA1</p>
-                      </td>
-                      <td class="align-middle text-center text-sm">
-                        <p class="text-xs font-weight-bold mb-0">4.100</p>
-                      </td>
-                      <td class="align-middle text-center">
-                        <p class="text-xs font-weight-bold mb-0">105.349</p>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div class="d-flex px-2 py-1">
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">PJ130058</h6>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <p class="text-xs font-weight-bold mb-0">AA1</p>
-                      </td>
-                      <td class="align-middle text-center text-sm">
-                        <p class="text-xs font-weight-bold mb-0">4.100</p>
-                      </td>
-                      <td class="align-middle text-center">
-                        <p class="text-xs font-weight-bold mb-0">105.349</p>
-                      </td>
-                    </tr>
+                    {% endfor %}
                   </tbody>
                 </table>
               </div>

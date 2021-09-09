@@ -26,6 +26,7 @@
 
     <div class="input-group">
       <input type="text" class="form-control" placeholder="Search">
+
     </div>
     <div class="collapse navbar-collapse  w-auto  max-height-vh-100 h-100" id="sidenav-collapse-main">
       <ul class="navbar-nav">
@@ -90,33 +91,33 @@
                   <div class="d-flex flex-column h-100">
                     <h5 class="font-weight-bolder">Price Prediction</h5>
                     <div class="container">
-                      <form action="#" method="post">
+                      <form autocomplete="off" action="#" method="post">
                         <div class="user-details">
-                          <div class="input-box">
+                          <div class="input-box col-md-2">
                             <span class="details">Value Date</span>
                             <input type="date" placeholder="Enter a number" name="value_date" required>
                           </div>
-                          <div class="input-box">
-                            <span class="details">Bond Code</span>
-                            <input type="text" placeholder="Enter a number" name="bond_name" required>
+                          <div class="autocomplete input-box col-md-3">
+                            <span class="details">Stock Code</span>
+                            <input id="myInput" type="text" name="stock_code" placeholder="e.g. DI140013">
                           </div>
-                          <div class="input-box">
+                          <div class="input-box col-md-3">
                             <span class="details">Eval Mid Yield</span>
-                            <input type="number" placeholder="e.g. 3.581" name="eval_mid_yield" step=".001" required>
+                            <input type="number" placeholder="e.g. 3.581" name="eval_mid_yield" step=".001">
                           </div>
-                          <div class="input-box">
+                          <div class="input-box col-md-3">
                             <span class="details">Composite Liquidity Score(T-1)</span>
-                            <input type="number" placeholder="e.g. 2.03" name="composite_liquidity_score" step=".01" required>
+                            <input type="number" placeholder="e.g. 2.03" name="composite_liquidity_score" step=".01">
                           </div>
-                          <div class="input-box">
+                          <div class="input-box col-md-3">
                             <span class="details">Coupon Frequency</span>
-                            <input type="number" placeholder="e.g. 2" name="coupon_frequency" required>
+                            <input type="number" placeholder="e.g. 2" name="coupon_frequency">
                           </div>
-                          <div class="input-box">
+                          <div class="input-box col-md-3">
                             <span class="details">Next Coupon Rate</span>
-                            <input type="number" placeholder="e.g. 5.06" name="next_coupon_rate" step=".01" required>
+                            <input type="number" placeholder="e.g. 4.738" name="next_coupon_rate" step=".001">
                           </div>
-                          <div class="callable-details">
+                          <div class="callable-details col-md-1">
                             <input type="radio" name="call" id="dot-1">
                             <input type="radio" name="call" id="dot-2">
                             <span class="callable-title">Callable</span> 
@@ -131,31 +132,487 @@
                               </label>
                             </div>
                           </div>
-                          <div class="input-box">
+                          <div class="input-box col-md-3">
                             <span class="details">Modified Duration</span>
-                            <input type="number" placeholder="e.g. 0.358" name="modified_duration" step=".001" required>
+                            <input type="number" placeholder="e.g. 0.358" name="modified_duration" step=".001">
                           </div>
-                          <div class="input-box">
+                          <div class="input-box col-md-3">
                             <span class="details">Eval Mid Price</span>
-                            <input type="number" placeholder="e.g. 100.581" name="eval_mid_price" step=".001" required>
+                            <input type="number" placeholder="e.g. 100.581" name="eval_mid_price" step=".001">
                           </div>
-                          <div class="input-box">
+                          <div class="input-box col-md-3">
                             <span class="details">Rating</span>
-                            <input type="text" placeholder="e.g. AA1" name="rating" required>
+                            <select class="form-control3" name="rating" >
+                              <option value="AAA">AAA</option>
+                              <option value="AAA (S)">AAA (S)</option>
+                              <option value="AAA IS">AAA IS</option>
+                              <option value="AA+ IS">AA+ IS</option>
+                              <option value="AA">AA</option>
+                              <option value="AA IS">AA IS</option>
+                              <option value="AA1">AA1</option>
+                              <option value="AA1 (S)">AA1 (S)</option>
+                              <option value="AA2">AA2</option>
+                              <option value="AA2 (S)">AA2 (S)</option>
+                              <option value="AA3">AA3</option>
+                              <option value="AA3 (S)">AA3 (S)</option>
+                              <option value="AA-">AA-</option>
+                              <option value="AA- IS">AA- IS</option>
+                              <option value="A+ IS">A+ IS</option>
+                              <option value="A IS">A IS</option>
+                              <option value="A1">A1</option>
+                              <option value="A2">A2</option>
+                              <option value="A3">A3</option>
+                              <option value="A-">A-</option>
+                              <option value="A- IS">A- IS</option>
+                            </select>
                           </div>
-                          <div class="input-box">
+                          <div class="input-box col-md-3">
                             <span class="details">Remaining Tenure(M)</span>
-                            <input type="number" placeholder="e.g. 6" name="remaining_tenure" required>
+                            <input type="number" placeholder="e.g. 6" name="remaining_tenure">
+                          </div>
+                          <div class="input-box col-md-2">
+                            <span class="details">OPR Level</span>
+                            <input type="number" placeholder="e.g. 1.75" name="opr_level" step=".01">
                           </div>
                         </div>
                         {% if predicted_price %}
-                          <h5 class="font-weight-bolder text-center">Predicted Price: {{ predicted_price }}</h5>
+                          <h5 class="font-weight-bolder text-center">Predicted Price: RM{{ predicted_price }}</h5>
                         {% endif %}
                         <div class="button">
                           <input type="submit" value="Predict">
                        </div>
                       </form>
-                      
+                      <script>
+                        function autocomplete(inp, arr) {
+                          /*the autocomplete function takes two arguments,
+                          the text field element and an array of possible autocompleted values:*/
+                          var currentFocus;
+                          /*execute a function when someone writes in the text field:*/
+                          inp.addEventListener("input", function(e) {
+                              var a, b, i, val = this.value;
+                              /*close any already open lists of autocompleted values*/
+                              closeAllLists();
+                              if (!val) { return false;}
+                              currentFocus = -1;
+                              /*create a DIV element that will contain the items (values):*/
+                              a = document.createElement("DIV");
+                              a.setAttribute("id", this.id + "autocomplete-list");
+                              a.setAttribute("class", "autocomplete-items");
+                              /*append the DIV element as a child of the autocomplete container:*/
+                              this.parentNode.appendChild(a);
+                              /*for each item in the array...*/
+                              for (i = 0; i < arr.length; i++) {
+                                /*check if the item starts with the same letters as the text field value:*/
+                                if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+                                  /*create a DIV element for each matching element:*/
+                                  b = document.createElement("DIV");
+                                  /*make the matching letters bold:*/
+                                  b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+                                  b.innerHTML += arr[i].substr(val.length);
+                                  /*insert a input field that will hold the current array item's value:*/
+                                  b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+                                  /*execute a function when someone clicks on the item value (DIV element):*/
+                                  b.addEventListener("click", function(e) {
+                                      /*insert the value for the autocomplete text field:*/
+                                      inp.value = this.getElementsByTagName("input")[0].value;
+                                      /*close the list of autocompleted values,
+                                      (or any other open lists of autocompleted values:*/
+                                      closeAllLists();
+                                  });
+                                  a.appendChild(b);
+                                }
+                              }
+                          });
+                          /*execute a function presses a key on the keyboard:*/
+                          inp.addEventListener("keydown", function(e) {
+                              var x = document.getElementById(this.id + "autocomplete-list");
+                              if (x) x = x.getElementsByTagName("div");
+                              if (e.keyCode == 40) {
+                                /*If the arrow DOWN key is pressed,
+                                increase the currentFocus variable:*/
+                                currentFocus++;
+                                /*and and make the current item more visible:*/
+                                addActive(x);
+                              } else if (e.keyCode == 38) { //up
+                                /*If the arrow UP key is pressed,
+                                decrease the currentFocus variable:*/
+                                currentFocus--;
+                                /*and and make the current item more visible:*/
+                                addActive(x);
+                              } else if (e.keyCode == 13) {
+                                /*If the ENTER key is pressed, prevent the form from being submitted,*/
+                                e.preventDefault();
+                                if (currentFocus > -1) {
+                                  /*and simulate a click on the "active" item:*/
+                                  if (x) x[currentFocus].click();
+                                }
+                              }
+                          });
+                          function addActive(x) {
+                            /*a function to classify an item as "active":*/
+                            if (!x) return false;
+                            /*start by removing the "active" class on all items:*/
+                            removeActive(x);
+                            if (currentFocus >= x.length) currentFocus = 0;
+                            if (currentFocus < 0) currentFocus = (x.length - 1);
+                            /*add class "autocomplete-active":*/
+                            x[currentFocus].classList.add("autocomplete-active");
+                          }
+                          function removeActive(x) {
+                            /*a function to remove the "active" class from all autocomplete items:*/
+                            for (var i = 0; i < x.length; i++) {
+                              x[i].classList.remove("autocomplete-active");
+                            }
+                          }
+                          function closeAllLists(elmnt) {
+                            /*close all autocomplete lists in the document,
+                            except the one passed as an argument:*/
+                            var x = document.getElementsByClassName("autocomplete-items");
+                            for (var i = 0; i < x.length; i++) {
+                              if (elmnt != x[i] && elmnt != inp) {
+                                x[i].parentNode.removeChild(x[i]);
+                              }
+                            }
+                          }
+                          /*execute a function when someone clicks in the document:*/
+                          document.addEventListener("click", function (e) {
+                              closeAllLists(e.target);
+                          });
+                        }
+                        
+            
+                        var stock_code = ['DI140013', 'DJ140003', 'DJ140039', 'DK140037', 'DK140038',
+       'DL140035', 'DL140036', 'DM140033', 'DM140034', 'DN100015',
+       'DN140031', 'DN140032', 'DN150002', 'DO140029', 'DO140030',
+       'DP080045', 'DP140005', 'DP140028', 'DQ080044', 'DQ140004',
+       'DQ140027', 'DR052766', 'DR080043', 'DR140025', 'DR140026',
+       'DS052767', 'DS140023', 'DS140024', 'DT140021', 'DT140022',
+       'DU140011', 'DU140012', 'DV140009', 'DV140010', 'DW140007',
+       'DW140008', 'DX070680', 'DX140006', 'DZ012851', 'DZ021250',
+       'DZ090254', 'PF200006', 'PH130069', 'PI130068', 'PI140058',
+       'PI150004', 'PI150010', 'PI170011', 'PI200007', 'PJ140034',
+       'PJ140053', 'PJ170012', 'PK130015', 'PK130057', 'PK140035',
+       'PK140052', 'PK170005', 'PK170006', 'PK170007', 'PK170008',
+       'PK170013', 'PK200003', 'PL120012', 'PL120033', 'PL130013',
+       'PL130014', 'PL130056', 'PL140036', 'PL140051', 'PL150011',
+       'PL170014', 'PL200002', 'PM110032', 'PM120011', 'PM120031',
+       'PM120032', 'PM130017', 'PM130022', 'PM130055', 'PM140037',
+       'PM140050', 'PM170015', 'PN100047', 'PN100055', 'PN110033',
+       'PN120010', 'PN120029', 'PN120030', 'PN120068', 'PN130020',
+       'PN130021', 'PN130054', 'PN140038', 'PN140049', 'PN150008',
+       'PN150013', 'PN150015', 'PN150016', 'PN150017', 'PN150019',
+       'PN150020', 'PN160001', 'PN160009', 'PN160011', 'PN160012',
+       'PN170009', 'PN170016', 'PN170025', 'PN170026', 'PN170027',
+       'PN170029', 'PN180001', 'PN180002', 'PN180003', 'PN180004',
+       'PN190003', 'PN190004', 'PN190005', 'PN190008', 'PN190012',
+       'PN190014', 'PN190015', 'PN200001', 'PN200005', 'PO100048',
+       'PO110034', 'PO120009', 'PO120027', 'PO120028', 'PO130018',
+       'PO130019', 'PO130053', 'PO140001', 'PO140002', 'PO140039',
+       'PO140048', 'PO170017', 'PO180006', 'PO180007', 'PP100049',
+       'PP110035', 'PP120008', 'PP120025', 'PP120026', 'PP130007',
+       'PP130025', 'PP130026', 'PP130052', 'PP140003', 'PP140004',
+       'PP140040', 'PP150012', 'PP170018', 'PQ080005', 'PQ100050',
+       'PQ110036', 'PQ120007', 'PQ120023', 'PQ120024', 'PQ130023',
+       'PQ130024', 'PQ130051', 'PQ140005', 'PQ140006', 'PQ170019',
+       'PR100051', 'PR110037', 'PR120006', 'PR120021', 'PR120022',
+       'PR130035', 'PR130036', 'PR130050', 'PR140007', 'PR140008',
+       'PR170020', 'PS070014', 'PS070034', 'PS080001', 'PS080002',
+       'PS080004', 'PS080008', 'PS080009', 'PS100052', 'PS100054',
+       'PS110038', 'PS110042', 'PS120005', 'PS120019', 'PS120020',
+       'PS120079', 'PS130033', 'PS130034', 'PS130060', 'PS140009',
+       'PS140010', 'PS170021', 'PT050003', 'PT050030', 'PT110039',
+       'PT120017', 'PT120018', 'PT130031', 'PT130032', 'PT140011',
+       'PT140012', 'PT170022', 'PU110040', 'PU130029', 'PU130030',
+       'PU140013', 'PU140014', 'PU170023', 'PV130027', 'PV130028',
+       'PV140015', 'PV140016', 'PV170024', 'PW130045', 'PW130046',
+       'PW140017', 'PW140018', 'PX070015', 'PX070035', 'PX130043',
+       'PX130044', 'PX140019', 'PX140020', 'PY050031', 'PY130041',
+       'PY130042', 'PY130067', 'PZ100010', 'PZ130037', 'PZ130038',
+       'PZ130039', 'PZ130040', 'PZ140059', 'PZ140060', 'PZ150002',
+       'PZ150006', 'PZ150009', 'PZ150014', 'PZ160006', 'PZ160007',
+       'PZ160015', 'PZ160016', 'PZ180005', 'PZ180008', 'PZ180009',
+       'PZ190001', 'PZ190002', 'PZ190007', 'PZ190013', 'PZ200004',
+       'UE180234', 'UE180235', 'UE180236', 'UE190219', 'UE190221',
+       'UE190225', 'UE190248', 'UE190271', 'UE190316', 'UE190343',
+       'UE190355', 'UE190365', 'UE190366', 'UE190368', 'UE190369',
+       'UE190395', 'UE200069', 'UE200106', 'UE200136', 'UF180003',
+       'UF180079', 'UF180094', 'UF180214', 'UF190026', 'UF190151',
+       'UF190233', 'UF190249', 'UF190286', 'UF190287', 'UF190370',
+       'UF190396', 'UF200035', 'UG160161', 'UG170097', 'UG170113',
+       'UG170114', 'UG170123', 'UG170124', 'UG170138', 'UG180004',
+       'UG180155', 'UG180173', 'UG180185', 'UG180250', 'UG190006',
+       'UG190027', 'UG190194', 'UG190227', 'UG190229', 'UG190232',
+       'UG190250', 'UG190397', 'UG200113', 'UH160157', 'UH160158',
+       'UH170125', 'UH180005', 'UH180075', 'UH190356', 'UH190398',
+       'UH200007', 'UI140174', 'UI140177', 'UI150042', 'UI150044',
+       'UI150063', 'UI150076', 'UI150137', 'UI160017', 'UI160025',
+       'UI160162', 'UI170045', 'UI170047', 'UI170053', 'UI170069',
+       'UI170074', 'UI170077', 'UI170098', 'UI170126', 'UI180006',
+       'UI180018', 'UI180023', 'UI180047', 'UI180053', 'UI180083',
+       'UI180163', 'UI180251', 'UI190007', 'UI190013', 'UI190028',
+       'UI190152', 'UI190230', 'UI190237', 'UI190238', 'UI190399',
+       'UI200031', 'UI200053', 'UI200083', 'UI200090', 'UJ170052',
+       'UJ170055', 'UJ170127', 'UJ180007', 'UJ180024', 'UJ190269',
+       'UJ190270', 'UJ190311', 'UJ190400', 'UK130080', 'UK130115',
+       'UK130116', 'UK130119', 'UK140147', 'UK140167', 'UK140176',
+       'UK150138', 'UK150139', 'UK160159', 'UK160163', 'UK170029',
+       'UK170078', 'UK170128', 'UK170144', 'UK180008', 'UK180046',
+       'UK190029', 'UK190153', 'UK190228', 'UK190257', 'UK190401',
+       'UL160164', 'UL160165', 'UL170129', 'UL180009', 'UL190312',
+       'UL190402', 'UM110073', 'UM140054', 'UM140179', 'UM170130',
+       'UM180010', 'UM190231', 'UM190403', 'UN110074', 'UN120030',
+       'UN120032', 'UN120038', 'UN130032', 'UN130048', 'UN140148',
+       'UN150035', 'UN150040', 'UN150064', 'UN150067', 'UN150090',
+       'UN150132', 'UN160125', 'UN170018', 'UN170035', 'UN170048',
+       'UN170067', 'UN170079', 'UN170131', 'UN170145', 'UN170146',
+       'UN170158', 'UN170161', 'UN180011', 'UN180026', 'UN180034',
+       'UN180078', 'UN180084', 'UN180089', 'UN180162', 'UN180210',
+       'UN180216', 'UN190218', 'UN190234', 'UN190256', 'UN190259',
+       'UN190313', 'UN190345', 'UN190380', 'UN200105', 'UN200140',
+       'UO110076', 'UO150029', 'UO170132', 'UO190260', 'UP110075',
+       'UP150030', 'UP170133', 'UP190261', 'UQ110077', 'UQ150031',
+       'UQ170134', 'UQ190262', 'UR110078', 'UR170135', 'UR190263',
+       'US060068', 'US100041', 'US110079', 'US120031', 'US130057',
+       'US170049', 'US170136', 'US180085', 'US190226', 'US190264',
+       'US190346', 'UT170137', 'UX160124', 'UZ090054', 'UZ170177',
+       'UZ170178', 'UZ180095', 'UZ190051', 'UZ190052', 'VE190062',
+       'VE190114', 'VE190122', 'VE190222', 'VE190250', 'VE190251',
+       'VE190261', 'VE190266', 'VE190267', 'VE190355', 'VE200020',
+       'VE200062', 'VE200066', 'VE200072', 'VE200079', 'VE200082',
+       'VE200090', 'VF180038', 'VF180049', 'VF180124', 'VF180130',
+       'VF180177', 'VF180345', 'VF180367', 'VF190061', 'VF190166',
+       'VF190171', 'VF190259', 'VF190260', 'VF190264', 'VF190265',
+       'VF190354', 'VG170002', 'VG170139', 'VG170167', 'VG170170',
+       'VG170181', 'VG170182', 'VG170187', 'VG170204', 'VG170222',
+       'VG170229', 'VG170251', 'VG170283', 'VG170290', 'VG170291',
+       'VG170322', 'VG170386', 'VG170392', 'VG170397', 'VG170404',
+       'VG180039', 'VG180050', 'VG180085', 'VG180088', 'VG180096',
+       'VG180110', 'VG180114', 'VG180122', 'VG180129', 'VG180176',
+       'VG180203', 'VG180234', 'VG180238', 'VG180261', 'VG180272',
+       'VG180300', 'VG180305', 'VG180344', 'VG180363', 'VG190002',
+       'VG190014', 'VG190020', 'VG190030', 'VG190033', 'VG190055',
+       'VG190063', 'VG190077', 'VG190094', 'VG190097', 'VG190104',
+       'VG190111', 'VG190116', 'VG190123', 'VG190170', 'VG190185',
+       'VG190193', 'VG190221', 'VG190252', 'VG190257', 'VG190258',
+       'VG190262', 'VG190263', 'VG190268', 'VG190288', 'VG190289',
+       'VG190296', 'VG190344', 'VG190352', 'VG200001', 'VG200002',
+       'VG200067', 'VG200083', 'VG200086', 'VG200087', 'VG200107',
+       'VH160240', 'VH160284', 'VH170156', 'VH170188', 'VH170205',
+       'VH170221', 'VH170239', 'VH170292', 'VH170293', 'VH170393',
+       'VH180002', 'VH180040', 'VH180051', 'VH180108', 'VH180112',
+       'VH180121', 'VH180127', 'VH180175', 'VH180339', 'VH180343',
+       'VH190021', 'VH190095', 'VH190149', 'VH190194', 'VH190343',
+       'VH190350', 'VH200018', 'VI140411', 'VI150024', 'VI150028',
+       'VI150044', 'VI150045', 'VI150052', 'VI150054', 'VI150069',
+       'VI150077', 'VI150078', 'VI150080', 'VI150148', 'VI150155',
+       'VI150160', 'VI150196', 'VI150251', 'VI150261', 'VI150273',
+       'VI160019', 'VI160033', 'VI160110', 'VI160132', 'VI160176',
+       'VI160179', 'VI160201', 'VI160219', 'VI160252', 'VI160285',
+       'VI160288', 'VI160293', 'VI160327', 'VI160430', 'VI160431',
+       'VI160447', 'VI170040', 'VI170124', 'VI170138', 'VI170141',
+       'VI170151', 'VI170155', 'VI170157', 'VI170168', 'VI170180',
+       'VI170189', 'VI170206', 'VI170220', 'VI170232', 'VI170238',
+       'VI170242', 'VI170252', 'VI170256', 'VI170294', 'VI170295',
+       'VI170323', 'VI170341', 'VI170342', 'VI170382', 'VI170384',
+       'VI170391', 'VI170394', 'VI170400', 'VI170403', 'VI180003',
+       'VI180004', 'VI180041', 'VI180052', 'VI180078', 'VI180086',
+       'VI180087', 'VI180089', 'VI180097', 'VI180109', 'VI180119',
+       'VI180128', 'VI180137', 'VI180174', 'VI180185', 'VI180186',
+       'VI180239', 'VI180248', 'VI180250', 'VI180258', 'VI180259',
+       'VI180273', 'VI180274', 'VI180275', 'VI180294', 'VI180301',
+       'VI180304', 'VI180312', 'VI180334', 'VI180342', 'VI180362',
+       'VI180369', 'VI180370', 'VI190022', 'VI190034', 'VI190058',
+       'VI190060', 'VI190064', 'VI190100', 'VI190119', 'VI190124',
+       'VI190150', 'VI190195', 'VI190212', 'VI190220', 'VI190229',
+       'VI190253', 'VI190287', 'VI190290', 'VI190297', 'VI190349',
+       'VI200010', 'VI200059', 'VI200068', 'VI200084', 'VI200095',
+       'VI200108', 'VJ130296', 'VJ130331', 'VJ130383', 'VJ140096',
+       'VJ140190', 'VJ140344', 'VJ140412', 'VJ140413', 'VJ150150',
+       'VJ150195', 'VJ150284', 'VJ150285', 'VJ160058', 'VJ160133',
+       'VJ160251', 'VJ160275', 'VJ160286', 'VJ160428', 'VJ160445',
+       'VJ160446', 'VJ170190', 'VJ170207', 'VJ170219', 'VJ170296',
+       'VJ170297', 'VJ170343', 'VJ170344', 'VJ180005', 'VJ180006',
+       'VJ180042', 'VJ180053', 'VJ180107', 'VJ180117', 'VJ180125',
+       'VJ180173', 'VJ190151', 'VJ190196', 'VJ190353', 'VK130025',
+       'VK130044', 'VK130057', 'VK130093', 'VK130153', 'VK130164',
+       'VK130165', 'VK130202', 'VK130245', 'VK130297', 'VK130328',
+       'VK130330', 'VK130386', 'VK140094', 'VK140095', 'VK140108',
+       'VK140143', 'VK140166', 'VK140189', 'VK140202', 'VK140345',
+       'VK140352', 'VK140353', 'VK140367', 'VK140414', 'VK150027',
+       'VK150053', 'VK150063', 'VK150067', 'VK150070', 'VK150128',
+       'VK150133', 'VK150137', 'VK150145', 'VK150151', 'VK150154',
+       'VK150194', 'VK150210', 'VK150252', 'VK150263', 'VK150264',
+       'VK150286', 'VK150287', 'VK160112', 'VK160134', 'VK160146',
+       'VK160159', 'VK160175', 'VK160180', 'VK160200', 'VK160250',
+       'VK160289', 'VK160294', 'VK170137', 'VK170142', 'VK170191',
+       'VK170208', 'VK170218', 'VK170233', 'VK170243', 'VK170253',
+       'VK170257', 'VK170298', 'VK170299', 'VK170345', 'VK170346',
+       'VK170390', 'VK180001', 'VK180007', 'VK180008', 'VK180043',
+       'VK180054', 'VK180075', 'VK180090', 'VK180098', 'VK180106',
+       'VK180115', 'VK180123', 'VK180172', 'VK180257', 'VK180303',
+       'VK180311', 'VK190031', 'VK190035', 'VK190065', 'VK190089',
+       'VK190101', 'VK190106', 'VK190120', 'VK190125', 'VK190152',
+       'VK190173', 'VK190183', 'VK190197', 'VK190213', 'VK190219',
+       'VK190227', 'VK190230', 'VK190235', 'VK190254', 'VK190282',
+       'VK190286', 'VK190298', 'VK190314', 'VK190351', 'VK200019',
+       'VK200069', 'VK200071', 'VK200085', 'VK200091', 'VK200094',
+       'VL120007', 'VL120063', 'VL120076', 'VL120296', 'VL120319',
+       'VL120332', 'VL130026', 'VL130027', 'VL130042', 'VL130043',
+       'VL130058', 'VL130166', 'VL130167', 'VL130190', 'VL130203',
+       'VL130287', 'VL130298', 'VL130329', 'VL140093', 'VL140150',
+       'VL140188', 'VL140346', 'VL140351', 'VL140405', 'VL140406',
+       'VL150127', 'VL150141', 'VL150152', 'VL150209', 'VL150288',
+       'VL150289', 'VL150345', 'VL160059', 'VL160145', 'VL160249',
+       'VL160255', 'VL160317', 'VL170166', 'VL170192', 'VL170217',
+       'VL170240', 'VL170300', 'VL170301', 'VL170347', 'VL170348',
+       'VL180009', 'VL180010', 'VL180044', 'VL180055', 'VL180105',
+       'VL180120', 'VL180149', 'VL180171', 'VL190153', 'VL190198',
+       'VL190276', 'VL190280', 'VL190281', 'VL190299', 'VL190348',
+       'VL200092', 'VM110102', 'VM110205', 'VM110426', 'VM110445',
+       'VM120008', 'VM120064', 'VM120077', 'VM120078', 'VM120297',
+       'VM120321', 'VM120333', 'VM120384', 'VM120389', 'VM130028',
+       'VM130029', 'VM130040', 'VM130041', 'VM130059', 'VM130168',
+       'VM130169', 'VM130189', 'VM130204', 'VM130286', 'VM130299',
+       'VM130345', 'VM130384', 'VM140092', 'VM140187', 'VM140347',
+       'VM140350', 'VM140398', 'VM140407', 'VM150153', 'VM150208',
+       'VM150262', 'VM150265', 'VM150290', 'VM150291', 'VM150346',
+       'VM160060', 'VM160135', 'VM160181', 'VM160248', 'VM160256',
+       'VM160290', 'VM170136', 'VM170165', 'VM170193', 'VM170216',
+       'VM170254', 'VM170258', 'VM170287', 'VM170302', 'VM170349',
+       'VM170350', 'VM180011', 'VM180012', 'VM180045', 'VM180056',
+       'VM180091', 'VM180104', 'VM180170', 'VM180335', 'VM180340',
+       'VM190066', 'VM190126', 'VM190154', 'VM190199', 'VM190237',
+       'VM190255', 'VM190300', 'VM190347', 'VN100268', 'VN100298',
+       'VN110029', 'VN110050', 'VN110103', 'VN110206', 'VN110216',
+       'VN110219', 'VN110356', 'VN110401', 'VN110420', 'VN110427',
+       'VN110446', 'VN110485', 'VN110513', 'VN120009', 'VN120027',
+       'VN120071', 'VN120079', 'VN120080', 'VN120176', 'VN120191',
+       'VN120196', 'VN120219', 'VN120224', 'VN120281', 'VN120286',
+       'VN120298', 'VN120322', 'VN120334', 'VN120337', 'VN120390',
+       'VN120455', 'VN130030', 'VN130031', 'VN130038', 'VN130039',
+       'VN130060', 'VN130094', 'VN130121', 'VN130152', 'VN130170',
+       'VN130171', 'VN130174', 'VN130188', 'VN130205', 'VN130233',
+       'VN130246', 'VN130285', 'VN130300', 'VN130344', 'VN130387',
+       'VN140053', 'VN140091', 'VN140109', 'VN140144', 'VN140164',
+       'VN140167', 'VN140171', 'VN140186', 'VN140335', 'VN140399',
+       'VN140400', 'VN140415', 'VN140416', 'VN140424', 'VN150062',
+       'VN150064', 'VN150071', 'VN150132', 'VN150157', 'VN150159',
+       'VN150207', 'VN150260', 'VN150272', 'VN150292', 'VN150293',
+       'VN150344', 'VN150347', 'VN160015', 'VN160022', 'VN160032',
+       'VN160111', 'VN160136', 'VN160160', 'VN160177', 'VN160202',
+       'VN160247', 'VN160257', 'VN160271', 'VN160295', 'VN160328',
+       'VN160330', 'VN160463', 'VN170041', 'VN170115', 'VN170143',
+       'VN170152', 'VN170154', 'VN170194', 'VN170215', 'VN170225',
+       'VN170241', 'VN170244', 'VN170245', 'VN170259', 'VN170286',
+       'VN170303', 'VN170304', 'VN170351', 'VN170352', 'VN170383',
+       'VN170388', 'VN170395', 'VN180013', 'VN180014', 'VN180046',
+       'VN180057', 'VN180079', 'VN180095', 'VN180099', 'VN180103',
+       'VN180169', 'VN180190', 'VN180242', 'VN180276', 'VN180280',
+       'VN180292', 'VN180302', 'VN180310', 'VN180337', 'VN180371',
+       'VN190017', 'VN190036', 'VN190059', 'VN190085', 'VN190091',
+       'VN190102', 'VN190105', 'VN190118', 'VN190155', 'VN190184',
+       'VN190188', 'VN190200', 'VN190214', 'VN190218', 'VN190231',
+       'VN190233', 'VN190236', 'VN190285', 'VN190294', 'VN190301',
+       'VN190315', 'VN190346', 'VN200060', 'VN200070', 'VN200089',
+       'VN200093', 'VN200096', 'VO110051', 'VO110207', 'VO110428',
+       'VO110447', 'VO120010', 'VO120081', 'VO120082', 'VO120299',
+       'VO120323', 'VO130032', 'VO130037', 'VO130061', 'VO130172',
+       'VO130206', 'VO130252', 'VO130301', 'VO130343', 'VO140185',
+       'VO140401', 'VO140417', 'VO150206', 'VO150294', 'VO150295',
+       'VO150348', 'VO160014', 'VO160137', 'VO160246', 'VO160258',
+       'VO170195', 'VO170214', 'VO170305', 'VO170306', 'VO170353',
+       'VO170354', 'VO180015', 'VO180016', 'VO180047', 'VO180058',
+       'VO180102', 'VO180168', 'VO180372', 'VO180373', 'VO190092',
+       'VO190156', 'VO190201', 'VO190302', 'VO190345', 'VP080396',
+       'VP080766', 'VP100408', 'VP110030', 'VP110052', 'VP110208',
+       'VP110402', 'VP110429', 'VP110448', 'VP120011', 'VP120084',
+       'VP120106', 'VP120177', 'VP120265', 'VP120266', 'VP120267',
+       'VP120268', 'VP120282', 'VP120300', 'VP120324', 'VP120457',
+       'VP130062', 'VP130095', 'VP130115', 'VP130207', 'VP130251',
+       'VP130302', 'VP130342', 'VP140145', 'VP140184', 'VP140404',
+       'VP140418', 'VP150072', 'VP150180', 'VP150181', 'VP150205',
+       'VP150259', 'VP150296', 'VP150297', 'VP150349', 'VP160013',
+       'VP160138', 'VP160259', 'VP170196', 'VP170213', 'VP170307',
+       'VP170308', 'VP170355', 'VP170356', 'VP180017', 'VP180018',
+       'VP180048', 'VP180059', 'VP180167', 'VP180374', 'VP180375',
+       'VP190016', 'VP190093', 'VP190157', 'VP190202', 'VP190217',
+       'VP190295', 'VP190303', 'VP190316', 'VQ062353', 'VQ070344',
+       'VQ070897', 'VQ070898', 'VQ080387', 'VQ080397', 'VQ080767',
+       'VQ080768', 'VQ110053', 'VQ110209', 'VQ110430', 'VQ110449',
+       'VQ120012', 'VQ120085', 'VQ120086', 'VQ120301', 'VQ120325',
+       'VQ130063', 'VQ130116', 'VQ130187', 'VQ130208', 'VQ130250',
+       'VQ130303', 'VQ130341', 'VQ140160', 'VQ140183', 'VQ150179',
+       'VQ150184', 'VQ150204', 'VQ150298', 'VQ150299', 'VQ150350',
+       'VQ160012', 'VQ160139', 'VQ160245', 'VQ160260', 'VQ170197',
+       'VQ170212', 'VQ170309', 'VQ170310', 'VQ170357', 'VQ170358',
+       'VQ180019', 'VQ180020', 'VQ180060', 'VQ180166', 'VQ180376',
+       'VQ180377', 'VQ190158', 'VQ190203', 'VR060697', 'VR060855',
+       'VR061774', 'VR061775', 'VR062348', 'VR062354', 'VR062355',
+       'VR070345', 'VR070346', 'VR070899', 'VR070900', 'VR080388',
+       'VR080398', 'VR080769', 'VR080770', 'VR110054', 'VR110210',
+       'VR110431', 'VR110450', 'VR120013', 'VR120087', 'VR120088',
+       'VR120302', 'VR120328', 'VR130064', 'VR130117', 'VR130186',
+       'VR130249', 'VR130304', 'VR130340', 'VR140161', 'VR140162',
+       'VR140182', 'VR150178', 'VR150183', 'VR150203', 'VR150300',
+       'VR150301', 'VR150351', 'VR160011', 'VR160140', 'VR160244',
+       'VR160261', 'VR170198', 'VR170211', 'VR170311', 'VR170312',
+       'VR170359', 'VR170360', 'VR180021', 'VR180022', 'VR180061',
+       'VR180165', 'VR180378', 'VR180379', 'VR190159', 'VR190204',
+       'VS060699', 'VS060854', 'VS061776', 'VS061777', 'VS062350',
+       'VS062351', 'VS062356', 'VS062357', 'VS070347', 'VS070348',
+       'VS070901', 'VS070902', 'VS080389', 'VS080399', 'VS080771',
+       'VS080772', 'VS110031', 'VS110055', 'VS110211', 'VS110215',
+       'VS110403', 'VS110432', 'VS110451', 'VS110514', 'VS120014',
+       'VS120026', 'VS120089', 'VS120090', 'VS120178', 'VS120197',
+       'VS120283', 'VS120303', 'VS120327', 'VS130065', 'VS130096',
+       'VS130118', 'VS130185', 'VS130248', 'VS130305', 'VS130339',
+       'VS130351', 'VS140056', 'VS140146', 'VS140163', 'VS140170',
+       'VS140181', 'VS150002', 'VS150073', 'VS150177', 'VS150182',
+       'VS150202', 'VS150302', 'VS150303', 'VS160010', 'VS160109',
+       'VS160141', 'VS160243', 'VS160262', 'VS160331', 'VS170003',
+       'VS170035', 'VS170042', 'VS170199', 'VS170210', 'VS170227',
+       'VS170313', 'VS170314', 'VS170367', 'VS170368', 'VS170389',
+       'VS180023', 'VS180024', 'VS180037', 'VS180062', 'VS180164',
+       'VS180251', 'VS180336', 'VS180380', 'VS190032', 'VS190160',
+       'VS190189', 'VS190205', 'VS190216', 'VS190232', 'VS200011',
+       'VS200088', 'VT050520', 'VT070349', 'VT070903', 'VT070904',
+       'VT080773', 'VT080774', 'VT110212', 'VT110433', 'VT110452',
+       'VT120015', 'VT120091', 'VT120093', 'VT120304', 'VT120326',
+       'VT130066', 'VT130184', 'VT130306', 'VT130338', 'VT130352',
+       'VT150176', 'VT150190', 'VT150201', 'VT150304', 'VT150305',
+       'VT160009', 'VT160142', 'VT160263', 'VT170202', 'VT170209',
+       'VT170315', 'VT170316', 'VT170365', 'VT170366', 'VT180025',
+       'VT180026', 'VT180063', 'VT180093', 'VT180163', 'VT190161',
+       'VT190206', 'VU050519', 'VU110213', 'VU110434', 'VU110453',
+       'VU120016', 'VU120094', 'VU120095', 'VU120320', 'VU130067',
+       'VU130307', 'VU130337', 'VU130353', 'VU150175', 'VU150189',
+       'VU150200', 'VU150306', 'VU150307', 'VU160008', 'VU160143',
+       'VU160264', 'VU160458', 'VU170201', 'VU170317', 'VU170318',
+       'VU170363', 'VU170364', 'VU180027', 'VU180028', 'VU180064',
+       'VU180162', 'VU190162', 'VU190207', 'VV110214', 'VV110435',
+       'VV110454', 'VV120017', 'VV120096', 'VV120097', 'VV130177',
+       'VV130308', 'VV130336', 'VV130354', 'VV150174', 'VV150188',
+       'VV150308', 'VV150309', 'VV160007', 'VV160144', 'VV160265',
+       'VV160459', 'VV170200', 'VV170319', 'VV170361', 'VV170362',
+       'VV180029', 'VV180030', 'VV180065', 'VV180161', 'VV190163',
+       'VV190208', 'VV190215', 'VW110436', 'VW120018', 'VW120098',
+       'VW120099', 'VW130178', 'VW130179', 'VW130309', 'VW150173',
+       'VW150187', 'VW150310', 'VW150311', 'VW160006', 'VW160266',
+       'VW160332', 'VW160460', 'VW180031', 'VW180032', 'VW190209',
+       'VX110056', 'VX110437', 'VX120019', 'VX120100', 'VX120101',
+       'VX130180', 'VX130181', 'VX130310', 'VX150158', 'VX150172',
+       'VX150186', 'VX150312', 'VX150313', 'VX160005', 'VX160108',
+       'VX160267', 'VX160461', 'VX170228', 'VX180033', 'VX180034',
+       'VX180252', 'VX190210', 'VY120020', 'VY150171', 'VY150185',
+       'VY150314', 'VY150315', 'VY160268', 'VY190211', 'VZ120021',
+       'VZ120022', 'VZ120023', 'VZ120024', 'VZ140395', 'VZ150316',
+       'VZ150317', 'VZ150318', 'VZ150319', 'VZ160050', 'VZ160269',
+       'VZ160270', 'VZ170387', 'VZ170398', 'VZ180148', 'VZ180281',
+       'VZ190186', 'VZ190187'];
+                        
+                        /*initiate the autocomplete function on the "myInput" element, */
+                        autocomplete(document.getElementById("myInput"), stock_code);
+                        </script>
                     </div>
                   </div>
                 </div>

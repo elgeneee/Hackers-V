@@ -51,13 +51,45 @@ button {
 	border-radius: 20px;
 	border: 1px solid #FF4B2B;
 	background-color: #FF4B2B;
-	color: #FFFFFF;
+	color: #fff;
 	font-size: 12px;
 	font-weight: bold;
 	padding: 12px 45px;
 	letter-spacing: 1px;
 	text-transform: uppercase;
 	transition: transform 80ms ease-in;
+}
+
+form .button {
+	margin: 45px 0px;
+	height: 5px;
+	text-align: center;
+  }
+  
+form .button input{
+	border: none;
+	border-radius: 8px;
+	color: white;
+	width: 120%;
+	height: 1000%;
+	letter-spacing: 1px;
+	background: linear-gradient(310deg, #BF336C 0%, #EF6133 100%);
+}
+
+form .button-1 {
+	margin: 0px 0px;
+	height: 5px;
+	text-align: center;
+  }
+  
+form .button-1 input{
+	border: none;
+	border-radius: 8px;
+	color: white;
+	width: 120%;
+	height: 1000%;
+	letter-spacing: 1px;
+	background: linear-gradient(310deg, #BF336C 0%, #EF6133 100%);
 }
 
 button:active {

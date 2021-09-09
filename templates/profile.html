@@ -140,12 +140,12 @@
           </div>
           <div class="col-auto my-auto">
             <div class="h-100">
-              <h5 class="mb-1">
-                Elgene Ee
-              </h5>
-              <p class="mb-0 font-weight-bold text-sm">
-                Student
-              </p>
+              {% if name %}
+              <h5 class="mb-1">{{name}}</h5>
+              {% endif %}
+              {% if occupation %}
+              <p class="mb-0 font-weight-bold text-sm">{{occupation}}</p>
+              {% endif %}
             </div>
           </div>
         </div>
@@ -170,11 +170,21 @@
             <div class="card-body p-3">
               <hr class="horizontal gray-light my-2">
               <ul class="list-group">
-                <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">First Name:</strong> &nbsp; Elgene</li>
-                <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Last Name:</strong> &nbsp; Ee</li>
-                <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Mobile:</strong> &nbsp; +60 12-4787763</li>
-                <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Email:</strong> &nbsp; eedren@gmail.com</li>
-                <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Location:</strong> &nbsp; Penang, MY</li>
+                {% if firstname %}
+                <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">First Name:</strong> &nbsp; {{firstname}}</li>
+                {% endif %}
+                {% if lastname %}
+                <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Last Name:</strong> &nbsp; {{lastname}}</li>
+                {% endif %}
+                {% if phoneNum %}
+                <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Mobile:</strong> &nbsp; +60 {{phoneNum}}</li>
+                {% endif %}
+                {% if email %}
+                <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Email:</strong> &nbsp; {{email}}</li>
+                {% endif %}
+                {% if location %}
+                <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Location:</strong> &nbsp; {{location}} , MY</li>
+                {% endif %}
               </ul>
             </div>
           </div>
