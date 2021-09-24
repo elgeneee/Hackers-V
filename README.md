@@ -41,9 +41,7 @@ Our team has came up with a web app helping users to predict the bond price usin
 <p align="center">
     <img src="screenshots/sign-up.png" width="800" height="508.26" />
 </p>
-<p align="center">
-    <img src="screenshots/dashboard.png" width="800" height="508.26" />
-</p>
+
 <p align="center">
     <img src="screenshots/profile.png" width="800" height="508.26" />
 </p>
