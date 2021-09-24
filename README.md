@@ -32,9 +32,24 @@ No. | Team Member
 Our team has came up with a web app helping users to predict the bond price using AutoML from Microsoft Azure. The application also suggests top 5 bonds to users based on return/volatility ratio.
 
 
-
 <!--SAMPLE OUTPUTS-->
-<!--## Sample Outputs
+## Sample Outputs
+
 <p align="center">
-    <img src="src/res/demo.gif" width="800" height="665.82" />
-</p>-->
+    <img src="screenshots/sign-in.png" width="800" height="508.26" />
+</p>
+<p align="center">
+    <img src="screenshots/sign-up.png" width="800" height="508.26" />
+</p>
+<p align="center">
+    <img src="screenshots/dashboard.png" width="800" height="508.26" />
+</p>
+<p align="center">
+    <img src="screenshots/profile.png" width="800" height="508.26" />
+</p>
+<p align="center">
+    <img src="screenshots/edit-profile.png" width="800" height="508.26" />
+</p>
+<p align="center">
+    <img src="screenshots/upgrade.png" width="800" height="508.26" />
+</p>
